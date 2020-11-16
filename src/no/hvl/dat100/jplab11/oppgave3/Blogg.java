@@ -4,47 +4,89 @@ import no.hvl.dat100.jplab11.common.TODO;
 import no.hvl.dat100.jplab11.oppgave1.*;
 
 public class Blogg {
-
+	private Innlegg[] tabell;
+	private int antall;
 	// TODO: objektvariable 
 
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		antall=0;
+		tabell=new Innlegg[20];
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		tabell=new Innlegg[lengde];
+		this.antall=0;
+	
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		return antall;
 	}
 	
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
+		return tabell;
 
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		boolean found=false;
+		int pos=0;
+		while(pos<antall && !found) {
+			if (tabell[pos].erLik(innlegg)) {
+				found=true;
+			}
+			else {
+				pos++;
+			}
+		}
+		if(found) {
+			return pos;
+		}
+		else return -1;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+		boolean found=false;
+		int pos=0;
+		while(pos<antall && !found) {
+			if (tabell[pos].erLik(innlegg)) {
+				found=true;
+			}
+			else {
+				pos++;
+			}
+		}
+		return found;
 	}
 
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
+		
+		if(antall<getSamling().length) 
+			return true;
+		
+		else return false;
 
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		if(!ledigPlass() || finnes(innlegg)) {
+			return false;
+		}
+		else {
+		tabell[antall]=innlegg;
+		antall++;
+		return true;
+		}
 	}
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+		String str;
+		str=antall+"\n";
+		for(int i = 0; i<antall; i++) {
+			str+=tabell[i].toString();
+		}
+		return str;
 	}
 
 	// valgfrie oppgaver nedenfor
